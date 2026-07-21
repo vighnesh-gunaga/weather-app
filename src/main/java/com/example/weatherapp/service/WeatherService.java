@@ -19,9 +19,10 @@ public class WeatherService {
 
     private final RestClient restClient = RestClient.create();
 
-    // Fetch weather data from OpenWeatherMap API
     public WeatherResponse getWeather(String city) {
+
         try {
+
             OpenWeatherResponse response = restClient.get()
                     .uri(apiUrl + "?q=" + city + "&appid=" + apiKey + "&units=metric")
                     .retrieve()
@@ -35,16 +36,15 @@ public class WeatherService {
                     response.weather[0].description,
                     response.wind.speed
             );
-        }
-        catch (HttpClientErrorException.NotFound ex)
-        {
+
+        } catch (HttpClientErrorException.NotFound ex) {
+
             throw new WeatherException(
-                    "Weather information could not be found for city: " + city
+                    "Weather information could not be found for location: " + city
             );
         }
     }
 
-    // Represents the response received from OpenWeatherMap
     private static class OpenWeatherResponse {
 
         public String name;
@@ -56,8 +56,10 @@ public class WeatherService {
     private static class Main {
 
         public double temp;
+
         @JsonProperty("feels_like")
         public double feelsLike;
+
         public int humidity;
     }
 

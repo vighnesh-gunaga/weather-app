@@ -5,50 +5,530 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #4ceaf8;
+
+    padding: 20px;
+
+    background: linear-gradient(
+            -45deg,
+            #4facfe,
+            #00f2fe,
+            #667eea,
+            #764ba2
+    );
+
+    background-size: 400% 400%;
+
+    animation: gradientAnimation 12s ease infinite;
+
+    overflow-x: hidden;
+
+
 }
+
+/* Animated background */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    filter: blur(5px);
+
+    animation: floating 8s ease-in-out infinite;
+
+    z-index: -1;
+
+
+}
+
+body::before {
+    top: 10%;
+    left: 10%;
+}
+
+body::after {
+    bottom: 10%;
+    right: 10%;
+
+    animation-delay: 3s;
+
+
+}
+
+/* Main Card */
 
 .weather-container {
-    background: rgb(38, 133, 136);
-    width: 400px;
-    padding: 30px;
-    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+
+
+    padding: 35px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow:
+            0 25px 60px rgba(0, 0, 0, 0.25);
+
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+
+    color: white;
+
+    animation: cardAppear 0.8s ease;
+
+
 }
 
-h1 {
-    margin-bottom: 25px;
-    color: rgb(11, 11, 64);
+/* Header */
+
+.weather-header h1 {
+    font-size: 32px;
+    font-weight: 600;
+
+
+    margin-bottom: 5px;
+
+    text-shadow:
+            0 3px 10px rgba(0, 0, 0, 0.2);
+
+
 }
+
+.weather-header h1 i {
+    color: #ffe066;
+
+
+    animation: sunAnimation 3s ease-in-out infinite;
+
+
+}
+
+.weather-header p {
+    font-size: 14px;
+    opacity: 0.85;
+
+
+    margin-bottom: 30px;
+
+
+}
+
+/* Search */
 
 .search-box {
     display: flex;
+    align-items: center;
+
+
     gap: 10px;
-    color: #4ceaf8;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    padding: 7px;
+
+    border-radius: 50px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+
+}
+
+.location-icon {
+    margin-left: 15px;
+
+
+    color: white;
+
+    font-size: 18px;
+
+
 }
 
 input {
     flex: 1;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+
+    min-width: 0;
+
+    padding: 13px 5px;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-family: "Poppins", sans-serif;
+
+
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
 }
 
 button {
-    padding: 12px 20px;
+    padding: 13px 20px;
+
     border: none;
-    border-radius: 5px;
+
+    border-radius: 30px;
+
     cursor: pointer;
-    color: blue;
+
+    background: white;
+
+    color: #667eea;
+
+    font-family: "Poppins", sans-serif;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+
+
 }
 
+button:hover {
+    transform: translateY(-2px);
+
+
+    box-shadow:
+            0 8px 20px rgba(0, 0, 0, 0.2);
+
+
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Weather Result */
+
 #weatherResult {
+    margin-top: 30px;
+
+
+    animation: weatherAppear 0.6s ease;
+
+
+}
+
+/* City */
+
+#weatherResult h2 {
+    font-size: 28px;
+
+
+    margin-bottom: 5px;
+
+
+}
+
+.location-name {
+    font-size: 14px;
+
+
+    opacity: 0.8;
+
+    margin-bottom: 15px;
+
+
+}
+
+/* Weather Icon */
+
+.weather-icon {
+    font-size: 70px;
+
+
+    margin: 10px 0 5px;
+
+    animation: iconFloat 3s ease-in-out infinite;
+
+}
+
+.temperature {
+    font-size: 55px;
+
+
+    font-weight: 600;
+
+    line-height: 1;
+
+
+}
+
+.condition {
+    text-transform: capitalize;
+
+
+    font-size: 18px;
+
+    margin-top: 10px;
+
+    opacity: 0.9;
+
+}
+
+/* Weather Information */
+
+.weather-info {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
     margin-top: 25px;
-    text-align: left;
+
+}
+
+.info-card {
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    transition: transform 0.3s ease;
+
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+
+
+    background: rgba(255, 255, 255, 0.22);
+
+
+}
+
+.info-card i {
+    font-size: 25px;
+
+    margin-bottom: 8px;
+
+    color: #ffe066;
+
+}
+
+.info-card p {
+    font-size: 13px;
+
+    opacity: 0.8;
+
+
+}
+
+.info-card strong {
+    display: block;
+
+
+    font-size: 18px;
+
+    margin-top: 3px;
+
+
+}
+
+/* Loading */
+
+.loading {
+    margin-top: 30px;
+}
+
+.spinner {
+    width: 45px;
+    height: 45px;
+
+    margin: auto;
+
+    border: 4px solid rgba(255, 255, 255, 0.3);
+
+    border-top: 4px solid white;
+
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+
+
+}
+
+.loading p {
+    margin-top: 12px;
+
+
+    font-size: 14px;
+
+
+}
+
+/* Error */
+
+.error {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: rgba(255, 80, 80, 0.25);
+
+    border: 1px solid rgba(255, 100, 100, 0.4);
+
+    color: white;
+
+
+}
+
+/* Animations */
+
+@keyframes gradientAnimation {
+
+
+0% {
+    background-position: 0% 50%;
+}
+
+50% {
+    background-position: 100% 50%;
+}
+
+100% {
+    background-position: 0% 50%;
+}
+
+
+}
+
+@keyframes floating {
+
+
+0%,
+100% {
+    transform: translateY(0);
+}
+
+50% {
+    transform: translateY(-30px);
+}
+
+
+}
+
+@keyframes cardAppear {
+
+
+from {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+}
+
+@keyframes weatherAppear {
+
+from {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+to {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+}
+
+@keyframes iconFloat {
+
+0%,
+100% {
+    transform: translateY(0);
+}
+
+50% {
+    transform: translateY(-8px);
+}
+
+}
+
+@keyframes sunAnimation {
+
+0%,
+100% {
+    transform: rotate(0deg);
+}
+
+50% {
+    transform: rotate(15deg);
+}
+
+}
+
+@keyframes spin {
+
+
+to {
+    transform: rotate(360deg);
+}
+
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .weather-container {
+    padding: 25px 20px;
+}
+
+    .weather-header h1 {
+        font-size: 26px;
+    }
+
+    .search-box {
+        padding: 5px;
+    }
+
+    button {
+        padding: 12px 15px;
+    }
+
+    .temperature {
+        font-size: 48px;
+    }
+
 }
